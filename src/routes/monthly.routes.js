@@ -11,9 +11,11 @@ router.get('/', async (req,res)=>{
 });
 
 router.post('/', async (req,res)=>{
-
-    const {madeBy, place, date, description, entry, ammount, cash} = req.body;
-    const expense = new Expense(madeBy, place, date, description, entry, ammount, cash);
+    console.log('entre en post');
+    console.log(req.body);
+    const {name, place} = req.body;
+    const expense = new Expense({name, place});
+    console.log(expense);
     await expense.save();
     res.json('Status: Expense Saved');
 })

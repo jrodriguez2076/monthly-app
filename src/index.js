@@ -3,6 +3,7 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const path = require('path');
+const bodyParser = require('body-parser');
 
 //requerir el modulo especificado en la base de datos
 const { mongoose } = require('./database');
@@ -13,7 +14,8 @@ app.set('port', process.env.PORT || 3000);
 
 //middleware
 app.use(morgan('dev'));
-app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
 //routes
 app.use('/api/month',require('./routes/monthly.routes'));
