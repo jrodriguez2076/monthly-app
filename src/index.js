@@ -19,6 +19,8 @@ app.use(bodyParser.json());
 
 //routes
 app.use('/api/month',require('./routes/monthly.routes'));
+app.use('/api/goals',require('./routes/goals.routes'));
+
 
 //static files
 app.use(express.static(path.join(__dirname, 'public')))
