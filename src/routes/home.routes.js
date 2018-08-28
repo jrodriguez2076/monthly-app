@@ -9,9 +9,15 @@ const Goal = require('../models/goal');
 
 //route para obtener todas las metas
 router.get('/', async (req,res)=>{
-    const goals = await Goal.find();
-    console.log(goals);
-    res.json(goals);        
+    console.log('ENTRE EN GET');
+    const grandTotal = () =>{
+        Expense.aggregate([
+            {$match: {}},
+            {$group: {_id:"$month", total:{$sum: "$ammount"}}}
+        ]);
+    }
+    console.log(grandTotal.total);
+    res.json(grandTotal.total)
 });
 
 //Route para agregar un ingreso
