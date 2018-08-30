@@ -1,6 +1,10 @@
 import React, { Component} from  'react';
 import { render } from 'react-dom';
 
+const Style = {
+    color: 'light-grey',
+};
+
 class Add extends Component {
     render() {
         return (
@@ -12,9 +16,9 @@ class Add extends Component {
                         Lugar:
                         <input type="text" maxLength="25" name="place" />
                         Fecha:
-                        <input type="date" name="date" />
+                        <input type="date" name="date" className="grey-text text-lighten-1" />
                         description:
-                        <input type="text" maxLength="100" name="place" />
+                        <input type="text" placeholder="Breve descripcion de gasto" maxLength="100" name="place" />
                         Presupuesto:
                         <input type="text" maxLength="100" name="place" />
                         Monto:
