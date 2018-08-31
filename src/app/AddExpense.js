@@ -3,30 +3,32 @@ import { render } from 'react-dom';
 import Select from 'react-select';
 
 const Style = {
-    color: 'light-grey',
+    backgroundColor: 'light-grey',
 };
 
 class Add extends Component {
     constructor(props){
         super(props);
         this.state = {
-             selectedOption: null
+             selectedName: null,
+             selectedEntry: null
         }
-    }
+    };
 
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
-    }
+        console.log(selectedOption);
+      }
 
     render() {
-        const { selectedOption } = this.state;
+        const { selectedOption } = this.state;  
         return (
             <div>
                 <h3 className="brand-logo">Agregar Gasto</h3>
                     <form>
-                        Hecha Por:
-                        <select value={selectedOption} onChange={this.handleChange} options={this.props.names}> 
-                        </select>
+                        Hecho Por:
+                        <Select className=""  onChange={this.handleChange} options={this.props.names}> 
+                        </Select>
                         {/* <input type="text" maxLength="20" name="name" /> */}
                         Lugar:
                         <input type="text" maxLength="25" name="place" />
@@ -35,7 +37,9 @@ class Add extends Component {
                         description:
                         <input type="text" placeholder="Breve descripcion de gasto" maxLength="100" name="place" />
                         Presupuesto:
-                        <input type="text" maxLength="100" name="place" />
+                        <Select className="" style={Style} onChange={this.handleChange} options={this.props.entries}> 
+                        </Select>
+                        {/* <input type="text" maxLength="100" name="place" /> */}
                         Monto:
                         <input type="number" maxLength="100" name="place" />
                         Mes:

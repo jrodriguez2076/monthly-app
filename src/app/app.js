@@ -16,10 +16,24 @@ const imageStyle ={
     borderRadius: "50%"
 };
 
-// const names = [
-//     { value: 'Ana', label: 'Ana' },
-//     { value: 'Jose', label: 'Jose' },
-//   ];
+const names = [
+    { value: 'Ana', label: 'Ana' },
+    { value: 'Jose', label: 'Jose' }
+];
+
+const entries = [ //Llenar con los presupuestos agregados. Si se agrega uno nuevo, se anade a la lista
+    { value: 'Alquiler', label: 'Alquiler' },
+    { value: 'Expensas', label: 'Expensas' },
+    { value: 'Comidas', label: 'Comidas' },
+    { value: 'SUBE', label: 'SUBE' },
+    { value: 'Saldo', label: 'Saldo' },
+    { value: 'Resto Jose', label: 'Resto Jose' },
+    { value: 'Resto Ana', label: 'Resto Ana' },
+    { value: 'Flia. Smith', label: 'Flia. Smith' },
+    { value: 'Casa', label: 'Casa' },
+    { value: 'Curso', label: 'Curso' }
+];
+
 
 class App extends Component{
     render() {
@@ -40,7 +54,7 @@ class App extends Component{
                 
                 <div className= "row">
                     <div className="card-panel col s5 cyan darken-3 yellow-text text-darken-3" style={ColumnStyle}>
-                        <Add/>
+                        <Add names={names} entries={entries}/>
                     </div>
                     <div className="card-panel col s5 offset-s2 center-align"  style={ColumnStyle}>
                         <h3>Ultimos Gastos</h3>
