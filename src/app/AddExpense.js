@@ -2,8 +2,13 @@ import React, { Component} from  'react';
 import { render } from 'react-dom';
 import Select from 'react-select';
 
-const Style = {
-    backgroundColor: 'light-grey',
+// const customControlStyles = base => ({
+//     height: 50,
+// });
+
+const StyleTest ={
+    margin: '10px 1px 10px 1px',
+    overflow: 'hidden'
 };
 
 class Add extends Component {
@@ -24,28 +29,28 @@ class Add extends Component {
         const { selectedOption } = this.state;  
         return (
             <div>
-                <h3 className="brand-logo">Agregar Gasto</h3>
-                    <form>
+                <h4 className="brand-logo">Agregar Gasto</h4>
+                    <form style={StyleTest}>
                         Hecho Por:
                         <Select className=""  onChange={this.handleChange} options={this.props.names}> 
                         </Select>
-                        {/* <input type="text" maxLength="20" name="name" /> */}
+                      
                         Lugar:
                         <input type="text" maxLength="25" name="place" />
                         Fecha:
                         <input type="date" name="date" className="grey-text text-lighten-1" />
-                        description:
+                        descripción:
                         <input type="text" placeholder="Breve descripcion de gasto" maxLength="100" name="place" />
                         Presupuesto:
-                        <Select className="" style={Style} onChange={this.handleChange} options={this.props.entries}> 
-                        </Select>
-                        {/* <input type="text" maxLength="100" name="place" /> */}
-                        Monto:
+                        <Select className="" onChange={this.handleChange} options={this.props.entries}> 
+                            </Select>
+                        Monnto:
                         <input type="number" maxLength="100" name="place" />
                         Mes:
                         <input type="text" maxLength="100" name="place" />
                         Forma de Pago:
                         <input type="text" maxLength="100" name="place" />
+                        <button class="btn waves-effect waves-light" style={StyleTest} type="submit">Agregar</button>
                     </form>
             </div>
         )
