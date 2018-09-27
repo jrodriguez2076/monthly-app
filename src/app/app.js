@@ -35,6 +35,12 @@ const entries = [ //Llenar con los presupuestos agregados. Si se agrega uno nuev
     { value: 'Curso', label: 'Curso' }
 ];
 
+let RecentExpenses= [
+    {amount: "1900", description: "Curso Ingles", name: "Ana" },
+    {amount: "3000", description: "Expensas agosto", name: "Jose" },
+    {amount: "7500", description: "Alquiler Agosto", name: "Jose"}
+]
+
 
 class App extends Component{
     render() {
@@ -55,7 +61,7 @@ class App extends Component{
                         <Add names={names} entries={entries}/>
                     </div>
                     <div className="card-panel col s5 offset-s2 center-align yellow-text text-darken-3" style={{borderRadius:12, backgroundColor:"#265B40"}}>
-                        <Latest/>
+                        <Latest Recent={RecentExpenses}/>
                     </div>    
                 </div>
                 <footer style={{backgroundColor: "#0D2127"}}>Powered by Joc</footer>

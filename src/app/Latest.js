@@ -20,15 +20,13 @@ const LatestCard = (props)=> {
     );
 };
 
+
+
 const Latest = (props)=> {
     return (
         <div>
             <h4>Ultimos Gastos</h4>
-            <LatestCard amount="1900" description="Curso Ingles" name="Ana" />
-            <br/>
-            <LatestCard amount="3000" description="Expensas agosto" name="Jose" />
-            <br/>
-            <LatestCard amount="7500" description="Alquiler Agosto" name="Jose" />
+            {props.Recent.map(Expenses=><LatestCard {...Expenses}/>)}
         </div>
     );
 };

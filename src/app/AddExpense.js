@@ -11,15 +11,18 @@ const StyleTest ={
     overflow: 'hidden'
 };
 
-class Add extends Component {
+//Componente de Agregado de nuevo Gasto
+class Add extends Component { 
     constructor(props){
         super(props);
         this.state = {
+            selectedOption: null,
              selectedName: null,
              selectedEntry: null
         }
     };
 
+    //Cambio de seleccion en elementos SELECT
     handleChange = (selectedOption) => {
         this.setState({ selectedOption });
         console.log(selectedOption);
