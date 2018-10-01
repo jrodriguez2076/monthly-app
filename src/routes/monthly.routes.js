@@ -38,9 +38,11 @@ router.get('/:id', async (req,res)=>{
 //Route para agregar un gasto
 router.post('/', async (req,res)=>{
     const {name, place, date, description, entry, ammount, cash, month} = req.body;
+    console.log(req.body);
     const expense = new Expense({name, place, date, description, entry, ammount, cash, month});
     await expense.save();
     res.json('Status: Expense Saved');
+    console.log('SAVED!!')
 });
 
 
