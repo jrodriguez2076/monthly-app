@@ -9,7 +9,7 @@ const expenseSchema = new Schema({
    entry: {type: String, required: true },
    ammount: {type: Number, required: true },
    month: {type: String, required: true},
-   cash: {type: Boolean, required: true}
+   cash: {type: Boolean}
 });
 
 module.exports = mongoose.model('expense', expenseSchema);

@@ -1,6 +1,7 @@
 import React, { Component} from  'react';
 import { render } from 'react-dom';
 import Select from 'react-select';
+import axios from 'axios';
 
 const request = new XMLHttpRequest();
 
@@ -15,7 +16,8 @@ class Add extends Component {
         super(props);
         this.state = {
              newName: null,
-             newEntry: null
+             newEntry: null,
+             cash: true
         }
     };
 
@@ -31,27 +33,16 @@ class Add extends Component {
             entry: this.state.newEntry,
             ammount: this.amountInput.value,
             month: this.monthInput.value,
-            cash: this.cashInput.value
+            cash: true
         }
+        
+        axios.post('http://localhost:3000/api/month',newExpense)
+            .then(res =>{
+                console.log(res);
+                console.log(res.data);
+            });
 
 
-        fetch('localhost:3000/api/month', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-                name: newExpense.name,
-                place: newExpense.place,
-                date: newExpense.date,
-                description: newExpense.description,
-                entry: newExpense.entry,
-                ammount: newExpense.ammount,
-                month: newExpense.month,
-                cash: newExpense.cash,
-            })
-        })
     }
 
     //Cambio de seleccion en elementos SELECT ----- Reemplazado por una funcion anonima en el evento onChange
@@ -111,10 +102,11 @@ class Add extends Component {
                         name="place"
                         required
                         ref={(input)=> this.monthInput = input}/>
-                        Forma de Pago:
-                        <input type="text" maxLength="100" name="place"
-                        ref={(input)=> this.cashInput = input} />
-                        <button class="btn waves-effect waves-light" style={StyleTest} type="submit" >Agregar</button>
+
+                        <label htmlFor="checkbox_id">Efectivo:</label>
+                        <input id ="checkbox_id" type="checkbox" name="cash" checked = {true} onChange={(event)=>{this.setState({cash:event.target.checked})}}/>
+                        <br />
+                        <button className="btn waves-effect waves-light" style={StyleTest} type="submit" >Agregar</button>
                     </form>
             </div>
         )

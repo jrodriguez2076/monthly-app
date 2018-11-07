@@ -8,8 +8,8 @@ const Style = {
 
 const NavBar = (props)=> {
     return (
-         <nav class="cyan darken-1">
-            <div class="nav-wrapper" style={Style}>
+         <nav className="cyan darken-1">
+            <div className="nav-wrapper" style={Style}>
                 <a href="#" className="brand-logo">Gastos Mensuales</a>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                 <li><a href="months.html">Historial</a></li>

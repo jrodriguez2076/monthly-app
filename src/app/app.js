@@ -38,7 +38,8 @@ const entries = [ //Llenar con los presupuestos agregados. Si se agrega uno nuev
 let RecentExpenses= [
     {amount: "1900", description: "Curso Ingles", name: "Ana" },
     {amount: "3000", description: "Expensas agosto", name: "Jose" },
-    {amount: "7500", description: "Alquiler Agosto", name: "Jose"}
+    {amount: "7500", description: "Alquiler Agosto", name: "Jose"},
+    {amount: "10000", description: "Alquiler Agosto", name: "Jose"}
 ]
 
 

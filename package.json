@@ -12,6 +12,7 @@
   "author": "Jose Rodriguez",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-preset-es2016": "^6.24.1",
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
