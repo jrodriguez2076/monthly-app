@@ -19,12 +19,6 @@ const NavBar = (props)=> {
             </div>
         </nav>
       
-        // <div className="col s12" style={ColumnStyle}>
-        //     <div className="container col s1">GASTOS MENSUALES</div>
-        //     <div className="col s1 offset-s6">RESUMEN</div>
-        //     <div className="col s1">PRESUPUESTOS</div>
-        //     <div className="col s1">METAS</div>
-        // </div> 
     );
 };
 

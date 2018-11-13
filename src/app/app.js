@@ -1,10 +1,11 @@
 import React, { Component} from  'react';
-import { render } from 'react-dom';
-
+//import { render } from 'react-dom';
+import ReactDom from 'react-dom';
 
 import Add from './AddExpense';
 import Latest from './Latest';
 import NavBar from './Header';
+import Axios from 'axios';
 
 
 const ColumnStyle = {
@@ -44,6 +45,29 @@ let RecentExpenses= [
 
 
 class App extends Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            RecentExpenses: [],
+            monthState: null
+        }
+    };
+
+    async componentDidMount(){
+        const today = new Date();
+        const month = today.getMonth() + 1;
+        this.setState({monthState: month});
+        console.log('Component did actually mount ');
+        const QueriedExpenses = await Axios.get('http://localhost:3000/api/month',{
+            params: {
+              month
+            }
+          });
+        console.log(QueriedExpenses.data);
+        this.setState({RecentExpenses: QueriedExpenses.data});
+    }
+       
+
     render() {
         return (
             <div style={{backgroundColor: "#0D2127"}}>
@@ -51,8 +75,8 @@ class App extends Component{
                 <div className="row" >
                     <div className="col s5"></div>
                     <div className="card-panel col s2 center-align z-depth-3 cyan lighten-4" style={{borderRadius:12}}>
-                        <h5 className="card-title">Resumen de Gastos:</h5>
-                        <span className="pulse">$$$$$</span>
+                        <h5 className="card-title">Resumen de Gastos del mes:</h5>
+                        <span className="pulse">{this.state.monthState}</span>
                     </div>
                     <div className="col s5"></div>
                 </div>
@@ -62,7 +86,7 @@ class App extends Component{
                         <Add names={names} entries={entries}/>
                     </div>
                     <div className="card-panel col s5 offset-s2 center-align yellow-text text-darken-3" style={{borderRadius:12, backgroundColor:"#265B40"}}>
-                        <Latest Recent={RecentExpenses}/>
+                         <Latest Recent={this.state.RecentExpenses} month={this.state.monthState}/>
                     </div>    
                 </div>
                 <footer style={{backgroundColor: "#0D2127"}}>Powered by Joc</footer>
@@ -71,4 +95,4 @@ class App extends Component{
     }
 }
 
-render(<App/>, document.getElementById('app'));
+ReactDom.render(<App/>, document.getElementById('app'));

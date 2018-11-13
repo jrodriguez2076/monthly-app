@@ -1,12 +1,11 @@
 import React, { Component} from  'react';
 import { render } from 'react-dom';
-
+import Axios from 'axios';
 
 const ColumnStyle = {
     borderRadius: 12,
     backgroundColor: "#5CA36F",
 };
-
 
 const LatestCard = (props)=> {
     return (
@@ -20,9 +19,8 @@ const LatestCard = (props)=> {
     );
 };
 
-
-
 const Latest = (props)=> {
+    
     return (
         <div>
             <h4>Ultimos Gastos</h4>
@@ -30,18 +28,5 @@ const Latest = (props)=> {
         </div>
     );
 };
-
-// class Latest extends Component {
-//     render() {
-//         return (
-//             <div className="card-panel hoverable" style={ColumnStyle}>
-
-//                 <h6>NOMBRE AQUI</h6>
-//                 <p className="truncate">Descripcion breve del gasto agregado previamente al log del sistema</p>
-//                 <p name="amount">$ monto</p>
-//             </div>
-//         )
-//     }
-// }
 
 export default Latest

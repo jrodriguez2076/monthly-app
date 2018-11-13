@@ -6,9 +6,11 @@ const Expense = require('../models/expense');
 const Income = require('../models/income');
 const Budget = require('../models/budget');
 
-//route para obtener todos los gastos
+//route para obtener todos los gastos del mes
 router.get('/', async (req,res)=>{
-    const expenses = await Expense.find();
+    let month = req.query.month;
+    console.log(month);
+    const expenses = await Expense.find({month});
     console.log(expenses);
     res.json(expenses);        
 });

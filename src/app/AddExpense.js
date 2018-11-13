@@ -33,7 +33,7 @@ class Add extends Component {
             entry: this.state.newEntry,
             ammount: this.amountInput.value,
             month: this.monthInput.value,
-            cash: true
+            cash: this.state.cash
         }
         
         axios.post('http://localhost:3000/api/month',newExpense)
@@ -45,11 +45,9 @@ class Add extends Component {
 
     }
 
-    //Cambio de seleccion en elementos SELECT ----- Reemplazado por una funcion anonima en el evento onChange
-    // handleChange = (selectedOption) => {
-    //     this.setState({ newEntry: selectedOption.value });
-    //     console.log(selectedOption.value);
-    //   }
+    HandleCheck = async (event)=>{
+        await this.setState({cash:event.target.checked});
+    }
 
     render() {
         return (
@@ -97,14 +95,15 @@ class Add extends Component {
                         ref={(input)=> this.amountInput = input}
                         />
                         Mes:
-                        <input type="text"
-                        maxLength="100"
-                        name="place"
+                        <input type="number"
+                        maxLength="2"
                         required
                         ref={(input)=> this.monthInput = input}/>
 
-                        <label htmlFor="checkbox_id">Efectivo:</label>
-                        <input id ="checkbox_id" type="checkbox" name="cash" checked = {true} onChange={(event)=>{this.setState({cash:event.target.checked})}}/>
+                        <label htmlFor="checkbox_id">
+                            <input id ="checkbox_id" type="checkbox" onChange={this.HandleCheck}/>
+                            <span>Efectivo</span>
+                        </label>
                         <br />
                         <button className="btn waves-effect waves-light" style={StyleTest} type="submit" >Agregar</button>
                     </form>
