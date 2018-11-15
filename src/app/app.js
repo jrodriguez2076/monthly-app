@@ -1,5 +1,4 @@
 import React, { Component} from  'react';
-//import { render } from 'react-dom';
 import ReactDom from 'react-dom';
 
 import Add from './AddExpense';
@@ -36,35 +35,45 @@ const entries = [ //Llenar con los presupuestos agregados. Si se agrega uno nuev
     { value: 'Curso', label: 'Curso' }
 ];
 
-let RecentExpenses= [
-    {amount: "1900", description: "Curso Ingles", name: "Ana" },
-    {amount: "3000", description: "Expensas agosto", name: "Jose" },
-    {amount: "7500", description: "Alquiler Agosto", name: "Jose"},
-    {amount: "10000", description: "Alquiler Agosto", name: "Jose"}
-]
-
 
 class App extends Component{
     constructor(props){
         super(props);
         this.state = {
             RecentExpenses: [],
-            monthState: null
+            monthState: null,
+            Total: 0
         }
     };
 
-    async componentDidMount(){
+    //Calcular Total de gastos desde un array
+    async CalculateTotal(expenses){
+        let Total = 0;
+        expenses.data.forEach(item =>{
+            Total += item.ammount;
+        })
+        await this.setState({Total});
+    }
+
+    //obtener mes actual
+    setMonth(){
         const today = new Date();
         const month = today.getMonth() + 1;
         this.setState({monthState: month});
-        console.log('Component did actually mount ');
-        const QueriedExpenses = await Axios.get('http://localhost:3000/api/month',{
+    }
+    
+
+    async componentDidMount(){
+        console.log('Component did mount ');
+
+        await this.setMonth();
+            const QueriedExpenses = await Axios.get('/api/month',{
             params: {
-              month
+              month: this.state.monthState
             }
           });
-        console.log(QueriedExpenses.data);
         this.setState({RecentExpenses: QueriedExpenses.data});
+        await this.CalculateTotal(QueriedExpenses);
     }
        
 
@@ -75,8 +84,11 @@ class App extends Component{
                 <div className="row" >
                     <div className="col s5"></div>
                     <div className="card-panel col s2 center-align z-depth-3 cyan lighten-4" style={{borderRadius:12}}>
-                        <h5 className="card-title">Resumen de Gastos del mes:</h5>
-                        <span className="pulse">{this.state.monthState}</span>
+                        <h5 className="card-title">Total Gastado</h5>
+                        <p className="card-content">
+                            <span>ARS: </span>
+                            <span className="pulse">{this.state.Total}</span>
+                        </p>
                     </div>
                     <div className="col s5"></div>
                 </div>
