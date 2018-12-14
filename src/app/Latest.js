@@ -1,6 +1,13 @@
 import React, { Component} from  'react';
+import Select from 'react-select';
 import { render } from 'react-dom';
 import Axios from 'axios';
+
+const sortOptions =[
+    { value: 'name', label: 'Nombre' },
+    { value: 'Recent', label: 'Mas recientes primero' },
+    { value: 'Oldest', label: 'Mas Antiguos primero' }
+]
 
 const ColumnStyle = {
     borderRadius: 12,
@@ -24,7 +31,12 @@ const Latest = (props)=> {
     return (
         <div>
             <h4>Ultimos Gastos</h4>
-            {props.Recent.map(Expenses=><LatestCard key={props._id}  {...Expenses}/>)}
+            {/* <Select className="col s2"
+                        // onChange={(selectedOption) => {this.setState({ newEntry: selectedOption.value })}}
+                        options={sortOptions}
+                        required>
+                        </Select> */}
+            {/* {props.Recent.map(Expenses=><LatestCard key={props._id}  {...Expenses}/>)} */}
         </div>
     );
 };

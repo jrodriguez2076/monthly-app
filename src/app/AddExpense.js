@@ -51,11 +51,11 @@ class Add extends Component {
 
     render() {
         return (
-            <div>
-                <h4 className="brand-logo">Agregar Gasto</h4>
+            <div className="center-align">
+                <h4>Agregar Gasto</h4>
                     <form style={StyleTest} onSubmit={this.handleSubmit}>
                         Hecho Por:
-                        <Select className=""
+                        <Select
                         onChange={(selectedName) => {this.setState({ newName: selectedName.value })}} //cambia la seleccion
                         options={this.props.names}>
                         </Select>

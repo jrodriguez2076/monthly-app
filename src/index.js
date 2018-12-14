@@ -20,10 +20,10 @@ app.use(bodyParser.json());
 //routes
 app.use('/api/month',require('./routes/monthly.routes'));
 app.use('/api/goals',require('./routes/goals.routes'));
-app.use('/api',require('./routes/home.routes'));
+app.use('/history',require('./routes/history.routes'));
 
 //static files
-app.use(express.static(path.join(__dirname, 'public')))
+app.all('*',express.static(path.join(__dirname, 'public')))
 
 //Start server
 app.listen(app.get('port'), ()=>{

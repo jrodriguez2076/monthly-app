@@ -10,6 +10,15 @@ module.exports = {
         use: 'babel-loader',                //Utilizar babel-loader
         test: /\.js$/,
         exclude: /node_modules/
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+          use: [
+            {
+              loader: 'file-loader',
+              options: {}
+            }
+          ]
       }]
   }
 };
