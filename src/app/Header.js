@@ -1,27 +1,29 @@
 import React, { Component} from  'react';
 import { render } from 'react-dom';
 import {Link} from 'react-router-dom';
-import { Navbar, Nav, NavItem,MenuItem,NavDropdown} from 'react-bootstrap';
 
 const Style = {
-    textTransform: "uppercase"
+    textTransform: "uppercase",
+    fontSize: "3em"
 };
 
 const NavBar = (props)=> {
     return (
-        <Navbar fixedTop>
-            <Navbar.Header>
+        // <Navbar fixedTop>
+            /* <Navbar.Header>
                 <Navbar.Brand>
                     <a href="#" style={Style}>monthly</a>
                 </Navbar.Brand>
-            </Navbar.Header>
-                <Nav style={{display:"flex", flexDirection:"row"}}>
-                        <Link to="/history">Historial</Link>
-                        <Link to="/history">Historial2</Link>
-                    <NavItem eventKey={2} href="/Budgets">Budgets</NavItem>
-                    <NavItem eventKey={3} href="/goals">goals</NavItem>
-                </Nav>
-        </Navbar>
+            </Navbar.Header> */
+            <div className="main-layout">
+                <nav style={{display:"flex", flexDirection:"row"}}>
+                        <a className="col s2" href="#" style={Style}>monthly</a>
+                        <ul className="right" id="nav-mobile">
+                            <li><Link to="/history">Historial</Link></li>
+                            <li><Link to="/history">Historial2</Link></li>
+                        </ul>
+                </nav>
+            </div>
 
         //  <nav style={{backgroundColor: "#00AD82"}}>
         //     <div className="nav-wrapper" style={Style}>

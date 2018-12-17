@@ -104,7 +104,7 @@ class Home extends Component{
                          <Latest Recent={this.state.RecentExpenses} month={this.state.monthState}/>
                     </div>     */}
                 </div>
-                <footer style={{backgroundColor: "#0D2127"}}>Powered by Joc</footer>
+                <footer style={{backgroundColor: "#1de9b6"}}>Powered by Joc</footer>
             </div>
         )
     }
