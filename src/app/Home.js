@@ -1,11 +1,9 @@
 import React, { Component} from  'react';
-import ReactDom from 'react-dom';
 
 import Add from './AddExpense';
 import Latest from './Latest';
 import NavBar from './Header';
 import Axios from 'axios';
-import { homedir } from 'os';
 
 
 const ColumnStyle = {
@@ -43,7 +41,8 @@ class Home extends Component{
         this.state = {
             RecentExpenses: [],
             monthState: null,
-            Total: 0
+            Total: 0,
+            Today: null
         }
     };
 
@@ -57,10 +56,15 @@ class Home extends Component{
     }
 
     //obtener mes actual
-    setMonth(){
+    async setMonth(){
         const today = new Date();
+        
+        const day = today.getDate();
         const month = today.getMonth() + 1;
-        this.setState({monthState: month});
+        const year = today.getFullYear();
+
+        await this.setState({Today: `${day}/${month}/${year}`})
+        await this.setState({monthState: month});
     }
 
     //Obtener mas gastos
@@ -82,23 +86,22 @@ class Home extends Component{
 
     render() {
         return (
-            <div style={{backgroundColor: "#1de9b6"}}>
-                <div>{<NavBar/>}</div>
-                <div className="row" >
-                    <div className="card-panel col s2 offset-s5 auto center-align z-depth-3 cyan lighten-4" style={{borderRadius:120, margin:"50"}}>
-                        <h5 className="card-title">Total</h5>
-                        <p className="card-content">
-                            <span>ARS: </span>
-                            <span>{this.state.Total}</span>
-                        </p>
+            <div style={{backgroundColor: "#00838f"}}>
+                <NavBar/>
+                <div className="row">
+                    <div className="card-panel col s2 offset-s5 center-align cyan lighten-4 cyan-text text-darken-3" style={{borderRadius:120 , margin:"50"}}>
+                        <p className="card-title">GASTOS AL {this.state.Today}</p>
+                        <h4 className="card-content">
+                            $ {this.state.Total}
+                        </h4>
                     </div>
                 </div>
                 
                 <div className= "row container col s10 white cyan-text text-darken-3" style={ColumnStyle}>
-                    <div className="col s3"></div>
+                    <div className="col s1"></div>
                     {/* <div className=" card-panel col s12 cyan darken-3 yellow-text text-darken-3" style={ColumnStyle}> */}
-                        <Add className="col s6" names={names} entries={entries}/>
-                    <div className="col s3"></div>
+                        <Add className="col s10" names={names} entries={entries}/>
+                    <div className="col s1"></div>
                     {/* </div> */}
                     {/* <div className="card-panel col s5 offset-s2 center-align yellow-text text-darken-3" style={{borderRadius:12, backgroundColor:"#265B40"}}>
                          <Latest Recent={this.state.RecentExpenses} month={this.state.monthState}/>

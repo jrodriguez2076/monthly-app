@@ -1,23 +1,19 @@
-import React, { Component} from  'react';
-import { render } from 'react-dom';
+import React, { Component } from 'react';
 import Select from 'react-select';
 import axios from 'axios';
 
-const request = new XMLHttpRequest();
-
-const StyleTest ={
+const StyleTest = {
     margin: '10px 1px 10px 1px',
-    overflow: 'hidden'
 };
 
 //Componente de Agregado de nuevo Gasto
 class Add extends Component {
-    constructor(props){
+    constructor(props) {
         super(props);
         this.state = {
-             newName: null,
-             newEntry: null,
-             cash: true
+            newName: null,
+            newEntry: null,
+            cash: true
         }
     };
 
@@ -35,9 +31,9 @@ class Add extends Component {
             month: this.monthInput.value,
             cash: this.state.cash
         }
-        
-        axios.post('http://localhost:3000/api/month',newExpense)
-            .then(res =>{
+
+        axios.post('http://localhost:3000/api/month', newExpense)
+            .then(res => {
                 console.log(res);
                 console.log(res.data);
             });
@@ -45,71 +41,72 @@ class Add extends Component {
 
     }
 
-    HandleCheck = async (event)=>{
-        await this.setState({cash:event.target.checked});
+    HandleCheck = async (event) => {
+        await this.setState({ cash: event.target.checked });
     }
 
     render() {
         return (
             <div className="center-align">
                 <h4>Agregar Gasto</h4>
-                    <form style={StyleTest} onSubmit={this.handleSubmit}>
-                        Hecho Por:
-                        <Select
-                        onChange={(selectedName) => {this.setState({ newName: selectedName.value })}} //cambia la seleccion
-                        options={this.props.names}>
+                <form style={StyleTest} onSubmit={this.handleSubmit}>
+                    <div style={{zIndex:"999"}}>
+                        <Select placeholder="Quien hizo el gasto?"
+                            onChange={(selectedName) => { this.setState({ newName: selectedName.value }) }} //cambia la seleccion
+                            options={this.props.names}>
                         </Select>
 
-                        Lugar:
-                        <input type="text"
-                        maxLength="25"
-                        name="place"
-                        required
-                        ref={(input)=> this.placeInput = input}/>
+                        <input placeholder="en dónde se hizo?" type="text"
+                            maxLength="25"
+                            name="place"
+                            required
+                            ref={(input) => this.placeInput = input} />
 
-                        Fecha:
                         <input type="date"
-                        name="date"
-                        className="grey-text text-lighten-1"
-                        required ref={(input)=> this.dateInput = input}/>
+                            placeholder="Cuándo se hizo?"
+                            name="date"
+                            className="grey-text text-lighten-2"
+                            required ref={(input) => this.dateInput = input} />
 
-                        descripción:
                         <input type="text"
-                        placeholder="Breve descripcion de gasto"
-                        maxLength="100"
-                        ref={(input)=> this.descriptionInput = input}
-                        name="place" />
+                            placeholder="Breve descripcion..."
+                            maxLength="100"
+                            ref={(input) => this.descriptionInput = input}
+                            name="place" />
 
-                        Presupuesto:
-                        <Select className=""
-                        onChange={(selectedOption) => {this.setState({ newEntry: selectedOption.value })}}
-                        options={this.props.entries}
-                        required>
+                        <Select placeholder="A qué rubro pertenece?"
+                            onChange={(selectedOption) => { this.setState({ newEntry: selectedOption.value }) }}
+                            options={this.props.entries}
+                            required>
                         </Select>
 
-                        Monto:
-                        <input type="number"
-                        maxLength="100"
-                        name="place"
-                        required
-                        ref={(input)=> this.amountInput = input}
+                        <input
+                            placeholder="cuánto se gastó?"
+                            type="number"
+                            maxLength="100"
+                            name="place"
+                            required
+                            ref={(input) => this.amountInput = input}
                         />
-                        Mes:
-                        <input type="number"
-                        maxLength="2"
-                        required
-                        ref={(input)=> this.monthInput = input}/>
+
+                        <input
+                            placeholder="A qué mes pertenece?"
+                            type="number"
+                            maxLength="2"                                           
+                            required
+                            ref={(input) => this.monthInput = input} />
 
                         <label htmlFor="checkbox_id">
-                            <input id ="checkbox_id" type="checkbox" onChange={this.HandleCheck}/>
+                            <input id="checkbox_id" type="checkbox" onChange={this.HandleCheck} />
                             <span>Efectivo</span>
                         </label>
-                        <br />
-                        <button className="btn waves-effect waves-light" style={StyleTest} type="submit" >Agregar</button>
-                    </form>
+                    </div>
+                    <br />
+                    <button className="btn waves-effect waves-light" style={{ margin: "10px 1px 10px 1px", zIndex: "1" }} type="submit" >Agregar</button>
+                </form>
             </div>
         )
-}
+    }
 }
 
 export default Add;
