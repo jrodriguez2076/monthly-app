@@ -89,7 +89,7 @@ class Home extends Component{
             <div style={{backgroundColor: "#00838f"}}>
                 <NavBar/>
                 <div className="row">
-                    <div className="card-panel col s2 offset-s5 center-align cyan lighten-4 cyan-text text-darken-3" style={{borderRadius:120 , margin:"50"}}>
+                    <div className="col s2 offset-s5 center-align cyan-text text-lighten-3" style={{backgroundColor: "#00838f", margin:"50"}}>
                         <p className="card-title">GASTOS AL {this.state.Today}</p>
                         <h4 className="card-content">
                             $ {this.state.Total}
@@ -97,7 +97,7 @@ class Home extends Component{
                     </div>
                 </div>
                 
-                <div className= "row container col s10 white cyan-text text-darken-3" style={ColumnStyle}>
+                <div className= "row container white cyan-text text-darken-3" style={ColumnStyle}>
                     <div className="col s1"></div>
                     {/* <div className=" card-panel col s12 cyan darken-3 yellow-text text-darken-3" style={ColumnStyle}> */}
                         <Add className="col s10" names={names} entries={entries}/>
