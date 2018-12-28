@@ -13,18 +13,26 @@ const sortOptions = [
 
 const LatestCard = (props) => {
     return (
-        <div className="container center-align row" style={{ borderRadius: 12 }}>
+        <div className="container center-align hoverable" style={{ borderRadius: 12 }}>
             <div className="row">
-                <div className="col s2">COLUMNA CENTRALIZADORA</div>
-                <div className="col s8 hoverable">
+                <div className="col s12">
                     <div className=" row">
-                        <span className="col s2"><img src={require('../public/Ana.jpg')} style={{ width: 100, height: "auto" }}></img></span>
-                        <span className="col s4"> Nombre y gastos aqui</span>
-                        <span className="col s2"> Espacio adicional aqui</span>
-                        <span className="col s2"> fecha y lugar aqui</span>
+                        <span className="col s3"><img src={require('../public/Ana.jpg')} style={{ width: 100, height: "auto" }}></img></span>
+                        <div className="row col s9">
+                            <div className="row">
+                                <h5 className="col s5">Jose Rodriguez</h5>
+                                <span className="col s2"> </span>
+                                <p className="col s5 "> dd/mm/yyyy</p>
+                            </div>
+                            <div className="row">
+                                <p className="col s5" style={{}}> $$$$$$$$</p>
+                            </div>
+                            <div className="row" style={{margin:0}}>
+                                <span className="col s12 left-align"> Descripcion de gasto aqui...</span>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div className="col s2">}COLUMNA CENTRALIZADORA</div>
             </div>
         </div>
 
@@ -41,8 +49,9 @@ const Latest = (props) => {
     return (
         <div style={{ backgroundColor: "#00838f" }}>
             <NavBar />
+            <h4 className="row cyan-text text-lighten-3 center-align">Ultimos Gastos</h4>
             <div className="container center-align white cyan-text text-darken-3" style={{ borderRadius: 12 }}>
-            <h4 className="row">Ultimos Gastos</h4>
+
                 <div className="row">
                     <div className="col s12 card-panel center-align">
 
