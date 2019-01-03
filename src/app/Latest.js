@@ -11,61 +11,46 @@ const sortOptions = [
     { value: 'Oldest', label: 'Mas Antiguos primero' }
 ]
 
-const LatestCard = (props) => {
-    return (
-        <div className="container center-align hoverable" style={{ borderRadius: 12 }}>
-            <div className="row">
-                <div className="col s12">
-                    <div className=" row">
-                        <span className="col s3"><img src={require('../public/Ana.jpg')} style={{ width: 100, height: "auto" }}></img></span>
-                        <div className="row col s9">
-                            <div className="row">
-                                <h5 className="col s5">Jose Rodriguez</h5>
-                                <span className="col s2"> </span>
-                                <p className="col s5 "> dd/mm/yyyy</p>
-                            </div>
-                            <div className="row">
-                                <p className="col s5" style={{}}> $$$$$$$$</p>
-                            </div>
-                            <div className="row" style={{margin:0}}>
-                                <span className="col s12 left-align"> Descripcion de gasto aqui...</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+const LatestCard = (props) => { //Genera cada item de la lista, de acuerdo con los ultimos gastos realizados
+    return ( 
+            <tr className="hoverable" style={{ borderRadius: 12 }}> 
+                <td>Alvin</td>
+                <td>5565</td>
+                <td>Villa Urquiza</td>
+                <td>Mercados</td>
+                <td>12/01/91</td>
+            </tr>
 
-        // {/* <div style={{ margin: "10px" }}>
-        //         <h6>{props.name}</h6>
-        //         <p className="truncate">{props.description}</p>
-        //         <p name="amount">{props.ammount}</p>
-        //     </div> */}
     );
 };
 
-const Latest = (props) => {
+const Latest = (props) => { //Layout general de pagina de gastos recientes
 
     return (
         <div style={{ backgroundColor: "#00838f" }}>
             <NavBar />
             <h4 className="row cyan-text text-lighten-3 center-align">Ultimos Gastos</h4>
             <div className="container center-align white cyan-text text-darken-3" style={{ borderRadius: 12 }}>
-
                 <div className="row">
-                    <div className="col s12 card-panel center-align">
-
-                        {/* <Select className="col s2"
-                        // onChange={(selectedOption) => {this.setState({ newEntry: selectedOption.value })}}
-                        options={sortOptions}
-                        required>
-                        </Select> */}
-                        {props.Recent.map(Expenses => <LatestCard className="card offset-s2" key={props._id}  {...Expenses} />)}
+                    <div className="container col s12 center-align">
+                        <table className="centered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Monto</th>
+                                    <th>Lugar</th>
+                                    <th>Presupuesto</th>
+                                    <th>Fecha</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {props.Recent.map(Expenses => <LatestCard key={props._id}  {...Expenses} />)}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-
     );
 };
 
