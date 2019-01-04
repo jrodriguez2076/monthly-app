@@ -11,15 +11,27 @@ const sortOptions = [
     { value: 'Oldest', label: 'Mas Antiguos primero' }
 ]
 
+const TableIndex = (props) => {
+    return (
+        <tr>
+            <th>Nombre</th>
+            <th>Monto</th>
+            <th>Lugar</th>
+            <th>Presupuesto</th>
+            <th>Fecha</th>
+        </tr>
+    )
+}
+
 const LatestCard = (props) => { //Genera cada item de la lista, de acuerdo con los ultimos gastos realizados
-    return ( 
-            <tr className="hoverable" style={{ borderRadius: 12 }}> 
-                <td>Alvin</td>
-                <td>5565</td>
-                <td>Villa Urquiza</td>
-                <td>Mercados</td>
-                <td>12/01/91</td>
-            </tr>
+    return (
+        <tr className="hoverable" key={props.id} style={{ borderRadius: 12 }}>
+            <td key={props.id}>{props.name}</td>
+            <td key={props.id}>{props.ammount}</td>
+            <td key={props.id}>{props.place}</td>
+            <td key={props.id}>{props.entry}</td>
+            <td key={props.id}>{props.date}</td>
+        </tr>
 
     );
 };
@@ -35,16 +47,10 @@ const Latest = (props) => { //Layout general de pagina de gastos recientes
                     <div className="container col s12 center-align">
                         <table className="centered">
                             <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Monto</th>
-                                    <th>Lugar</th>
-                                    <th>Presupuesto</th>
-                                    <th>Fecha</th>
-                                </tr>
+                                <TableIndex/>
                             </thead>
                             <tbody>
-                                {props.Recent.map(Expenses => <LatestCard key={props._id}  {...Expenses} />)}
+                                {props.Recent.map(Expenses => <LatestCard  {...Expenses} key={props.id} />,)}
                             </tbody>
                         </table>
                     </div>
