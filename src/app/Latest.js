@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Select from 'react-select';
-import { render } from 'react-dom';
 import Axios from 'axios';
 
 import NavBar from './Header';
@@ -19,6 +18,7 @@ const TableIndex = (props) => {
             <th>Lugar</th>
             <th>Presupuesto</th>
             <th>Fecha</th>
+            <th>Acciones</th>
         </tr>
     )
 }
@@ -31,6 +31,7 @@ const LatestCard = (props) => { //Genera cada item de la lista, de acuerdo con l
             <td key={props.id}>{props.place}</td>
             <td key={props.id}>{props.entry}</td>
             <td key={props.id}>{props.date}</td>
+            <td> <button class=" btn-floating btn-medium waves-effect waves-light cyan material-icons">edit</button> <button class="btn-floating btn-medium waves-effect waves-light cyan material-icons">delete</button></td>
         </tr>
 
     );
@@ -39,7 +40,7 @@ const LatestCard = (props) => { //Genera cada item de la lista, de acuerdo con l
 const Latest = (props) => { //Layout general de pagina de gastos recientes
 
     return (
-        <div style={{ backgroundColor: "#00838f" }}>
+        <div id="fullscreen" style={{ backgroundColor: "#00838f"}}>
             <NavBar />
             <h4 className="row cyan-text text-lighten-3 center-align">Ultimos Gastos</h4>
             <div className="container center-align white cyan-text text-darken-3" style={{ borderRadius: 12 }}>
