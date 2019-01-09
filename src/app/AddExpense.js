@@ -42,7 +42,11 @@ class Add extends Component {
     }
 
     HandleCheck = async (event) => {
+        if (event.target.input = "debito"){
+            console.log("fue debito")
+        }
         await this.setState({ cash: event.target.checked });
+
     }
 
     render() {
@@ -96,9 +100,17 @@ class Add extends Component {
                             required
                             ref={(input) => this.monthInput = input} />
 
-                        <label htmlFor="checkbox_id">
-                            <input id="checkbox_id" type="checkbox" onChange={this.HandleCheck} />
+                        <label htmlFor="efectivo">
+                            <input id="efectivo" type="checkbox" onChange={this.HandleCheck} />
                             <span>Efectivo</span>
+                        </label>
+                        <label htmlFor="debito">
+                            <input id="debito" type="checkbox" onChange={this.HandleCheck} />
+                            <span>Débito</span>
+                        </label>
+                        <label htmlFor="pagoMisCuentas">
+                            <input id="pagoMisCuentas" type="checkbox" onChange={this.HandleCheck} />
+                            <span>PagoMisCuentas</span>
                         </label>
                     </div>
                     <br />
