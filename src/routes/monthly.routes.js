@@ -9,11 +9,24 @@ const Budget = require('../models/budget');
 //route para obtener todos los gastos del mes
 router.get('/', async (req,res)=>{
     let month = req.query.month;
-    console.log(month);
-    const expenses = await Expense.find({month});
+    console.log("entrando a la API");
+    const expenses = await Expense.find({month}).sort({date: -1});
     console.log(expenses);
     res.json(expenses);        
 });
+
+router.get('/edit', async (req,res)=>{
+    try {
+    let ExpenseId = req.query._id;
+    console.log(req.query._id);
+    const expenses = await Expense.findById(ExpenseId);
+    console.log(expenses);
+    res.json(expenses);
+    } catch (err){
+        console.log(`Error Dude! this was the cause: ${err}`);
+    }        
+});
+
 
 //route para obtener todos los ingresos
 router.get('/income', async (req,res)=>{

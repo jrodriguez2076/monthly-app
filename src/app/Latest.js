@@ -8,7 +8,26 @@ const sortOptions = [
     { value: 'name', label: 'Nombre' },
     { value: 'Recent', label: 'Mas recientes primero' },
     { value: 'Oldest', label: 'Mas Antiguos primero' }
-]
+];
+
+const HandleEdit = async (expenseId)=>{
+    console.log(expenseId)
+    const expenseToEdit = await Axios.get('/api/month/edit', {
+        params: {
+            _id: expenseId
+        }
+    });
+
+    console.log(expenseToEdit.data);
+}
+
+const HandleDelete = async (expenseId)=>{
+    if (confirm("Estás seguro de querer eliminar esta entrada?")) {
+        M.toast({html: 'Eliminada!', classes: 'rounded'})
+      } else {
+        M.toast({html: 'Solicitud cancelada', classes: 'rounded'})
+      }
+}
 
 const TableIndex = (props) => {
     return (
@@ -24,14 +43,22 @@ const TableIndex = (props) => {
 }
 
 const LatestCard = (props) => { //Genera cada item de la lista, de acuerdo con los ultimos gastos realizados
+    const today = new Date(props.date);
+    const day = today.getDate()+ 1;
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+
     return (
         <tr className="hoverable" key={props.id} style={{ borderRadius: 12 }}>
             <td key={props.id}>{props.name}</td>
             <td key={props.id}>{props.ammount}</td>
             <td key={props.id}>{props.place}</td>
             <td key={props.id}>{props.entry}</td>
-            <td key={props.id}>{props.date}</td>
-            <td> <button class=" btn-floating btn-medium waves-effect waves-light cyan material-icons">edit</button> <button class="btn-floating btn-medium waves-effect waves-light cyan material-icons">delete</button></td>
+            <td key={props.id}>{`${day}/${month}/${year}`}</   td>
+            <td>
+                <button class=" btn-floating btn-medium waves-effect waves-light cyan material-icons" onClick={() =>HandleEdit(props._id)} style={{marginRight:10}}>edit</button>
+                <button class="btn-floating btn-medium waves-effect waves-light cyan material-icons" onClick={() =>HandleDelete(props._id)}>delete</button>
+            </td>
         </tr>
 
     );

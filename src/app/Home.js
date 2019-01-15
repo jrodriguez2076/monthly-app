@@ -43,27 +43,6 @@ class Home extends Component{
         }
     };
 
-    //Calcular Total de gastos desde un array
-    // async CalculateTotal(expenses){
-    //     let Total = 0;
-    //     expenses.forEach(item =>{
-    //         Total += item.ammount;
-    //     })
-    //     await this.setState({Total});
-    // }
-
-    // //obtener mes actual
-    // async setMonth(){
-    //     const today = new Date();
-        
-    //     const day = today.getDate();
-    //     const month = today.getMonth() + 1;
-    //     const year = today.getFullYear();
-
-    //     await this.setState({Today: `${day}/${month}/${year}`})
-    //     await this.setState({monthState: month});
-    // }
-
     // //Obtener mas gastos
     
 
