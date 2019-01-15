@@ -17,7 +17,7 @@ const totalStyle ={
 };
 
 const names = [
-    { value: 'Ana', label: 'Ana' },
+    { value: 'Aniita', label: 'Ana' },
     { value: 'Jose', label: 'Jose' }
 ];
 

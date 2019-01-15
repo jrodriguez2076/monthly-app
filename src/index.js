@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 
 //routes
 app.use('/api/month',require('./routes/monthly.routes'));
-app.use('/api/goals',require('./routes/goals.routes'));
+// app.use('/',require('./routes/home.routes'));
 app.use('/history',require('./routes/history.routes'));
 
 //static files
