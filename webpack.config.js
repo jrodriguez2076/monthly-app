@@ -3,7 +3,7 @@ module.exports = {
   output: {                                 //Ruta de destino para archivo convertido
       path: __dirname + '/src/public',
       filename: 'bundle.js',
-      // publicPath: '/'
+      publicPath: '/'
   },
   module: {                                  // Reglas para Interactuar con Webpack
     rules : [
@@ -16,7 +16,7 @@ module.exports = {
         test: /\.(png|jpg|gif|jpeg)$/, use: [{loader: 'file-loader', options: {}}]
       }]
   },
-  // devServer: {
-  //   historyApiFallback: true,
-  // }
+  devServer: {
+    historyApiFallback: true,
+  }
 };

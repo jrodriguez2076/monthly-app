@@ -1,7 +1,6 @@
 import React, { Component} from  'react';
 
 import Add from './AddExpense';
-import Latest from './Latest';
 import NavBar from './Header';
 
 
@@ -54,7 +53,7 @@ class Home extends Component{
 
     render() {
         return (
-            <div style={{backgroundColor: "#00838f", flex: 1}}>
+            <div id="fullscreen" style={{backgroundColor: "#00838f", flex: 1}}>
                 <NavBar/>
                 <div className="row">
                     <div className="col s2 offset-s5 center-align cyan-text text-lighten-3" style={{backgroundColor: "#00838f", margin:"50"}}>
@@ -67,10 +66,9 @@ class Home extends Component{
                 
                 <div className= "row container white cyan-text text-darken-3" style={ColumnStyle}>
                     <div className="col s1"></div>
-                        <Add className="col s10" names={names} entries={entries}/>
+                        <Add className="col s10" names={names} entries={entries} Today={this.props.Today} monthState={this.props.monthState} totalUpdate={this.props.totalUpdate}/>
                     <div className="col s1"></div>
                 </div>
-                <footer style={{backgroundColor: "#1de9b6"}}>Powered by Joc</footer>
             </div>
         )
     }

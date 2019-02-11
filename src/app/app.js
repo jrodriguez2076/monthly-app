@@ -11,6 +11,7 @@ import Latest from './Latest'
 class App extends Component {
     constructor(props) {
         super(props);
+        this.totalUpdate = this.totalUpdate.bind(this)
         this.state = {
             RecentExpenses: [],
             monthState: null,
@@ -18,6 +19,12 @@ class App extends Component {
             Today: null
         }
     };
+
+    totalUpdate(increment) {
+        this.setState((prevState)=> ({
+            Total: prevState.Total + increment
+        }))
+      }
 
     async CalculateTotal(expenses){
         let Total = 0;
@@ -27,7 +34,7 @@ class App extends Component {
         await this.setState({Total});
     }
 
-    //obtener mes actual
+    //get current month
     async setMonth() {
         const today = new Date();
 
@@ -39,7 +46,7 @@ class App extends Component {
         await this.setState({ monthState: month });
     }
 
-    //Obtener mas gastos
+    //Fetch Expenses
     async componentDidMount() {
         console.log('Component did mount ');
 
@@ -58,7 +65,7 @@ class App extends Component {
         return (
                 <BrowserRouter>
                     <Switch>
-                        <Route exact path='/' render={(props) => <Home {...props} Today={this.state.Today} Total={this.state.Total} RecentExpenses={this.state.RecentExpenses} />}  />
+                        <Route exact path='/' render={(props) => <Home {...props} Today={this.state.Today} monthState={this.state.monthState} Total={this.state.Total} RecentExpenses={this.state.RecentExpenses} totalUpdate={this.totalUpdate} />}  />
                         <Route exact path='/history' render={(props) => <Latest {...props} Recent={this.state.RecentExpenses} month={this.state.monthState} />} />
                     </Switch>
                 </BrowserRouter>

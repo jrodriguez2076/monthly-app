@@ -6,6 +6,10 @@ const StyleTest = {
     margin: '10px 1px 10px 1px',
 };
 
+const checkboxLayout = {
+    margin: 10,
+}
+
 //Componente de Agregado de nuevo Gasto
 class Add extends Component {
     constructor(props) {
@@ -17,10 +21,18 @@ class Add extends Component {
         }
     };
 
+    clearForm = () => { 
+        document.getElementById("add-new-expense").reset();
+      }
+
     //Logica de manejo de submit
-    handleSubmit = (event) => {
+    handleSubmit = async (event) => {
         event.preventDefault();
+        let expenseDate;
+        let expenseMonth;
         console.log("Submitting Form");
+        expenseDate = new Date(this.dateInput.value);
+        expenseMonth = expenseDate.getMonth() + 1;
         let newExpense = {
             name: this.state.newName,
             place: this.placeInput.value,
@@ -28,24 +40,45 @@ class Add extends Component {
             description: this.descriptionInput.value,
             entry: this.state.newEntry,
             ammount: this.amountInput.value,
-            month: this.monthInput.value,
+            month: expenseMonth,
             cash: this.state.cash
         }
 
-        axios.post('http://localhost:3000/api/month', newExpense)
+        await axios.post('http://localhost:3000/api/month', newExpense)
             .then(res => {
                 console.log(res);
                 console.log(res.data);
             });
 
 
+        if (expenseMonth == this.props.monthState) {
+            console.log("This was this month. Updating the total...")
+            this.props.totalUpdate(parseInt(this.amountInput.value));
+        };
+
+        this.clearForm();
+        M.toast({html: 'Gasto agregado!', classes: 'rounded'})
     }
 
-    HandleCheck = async (event) => {
-        if (event.target.input = "debito"){
-            console.log("fue debito")
-        }
-        await this.setState({ cash: event.target.checked });
+    HandleCheck = async (method) => {
+        console.log(method);
+        switch(method) {
+            case 'efectivo':
+                console.log('fue efectivo')
+                await this.setState({ cash: true });
+                break;
+            case 'debito':
+                console.log('fue debito')
+                await this.setState({ cash: false });
+                break;
+            case 'pagomiscuentas':
+                console.log('pagomiscuentas')
+                await this.setState({ cash: false });
+                break;
+            default:
+                console.log('ninguno')
+          } 
+        
 
     }
 
@@ -53,9 +86,9 @@ class Add extends Component {
         return (
             <div className="center-align">
                 <h4>Agregar Gasto</h4>
-                <form style={StyleTest} onSubmit={this.handleSubmit}>
-                    <div style={{zIndex:"999"}}>
-                        <Select placeholder="Quien hizo el gasto?"
+                <form id="add-new-expense" style={StyleTest} onSubmit={this.handleSubmit}>
+                    <div style={{ zIndex: "999" }}>
+                        <Select id="name-Input" placeholder="Quien hizo el gasto?"
                             onChange={(selectedName) => { this.setState({ newName: selectedName.value }) }} //cambia la seleccion
                             options={this.props.names}>
                         </Select>
@@ -78,7 +111,7 @@ class Add extends Component {
                             ref={(input) => this.descriptionInput = input}
                             name="place" />
 
-                        <Select placeholder="A qué rubro pertenece?"
+                        <Select id="entry-Input" placeholder="A qué rubro pertenece?" style={{ position: 'fixed',  zIndex: "999"}}
                             onChange={(selectedOption) => { this.setState({ newEntry: selectedOption.value }) }}
                             options={this.props.entries}
                             required>
@@ -93,28 +126,21 @@ class Add extends Component {
                             ref={(input) => this.amountInput = input}
                         />
 
-                        <input
-                            placeholder="A qué mes pertenece?"
-                            type="number"
-                            maxLength="2"                                           
-                            required
-                            ref={(input) => this.monthInput = input} />
-
-                        <label htmlFor="efectivo">
-                            <input id="efectivo" type="checkbox" onChange={this.HandleCheck} />
+                        <label htmlFor="efectivo" style={checkboxLayout}>
+                            <input id="efectivo" type="checkbox"  onChange={() =>this.HandleCheck("efectivo")} />
                             <span>Efectivo</span>
                         </label>
-                        <label htmlFor="debito">
-                            <input id="debito" type="checkbox" onChange={this.HandleCheck} />
+                        <label htmlFor="debito" style={checkboxLayout}>
+                            <input id="debito" type="checkbox" onChange={() =>this.HandleCheck("debito")} />
                             <span>Débito</span>
                         </label>
-                        <label htmlFor="pagoMisCuentas">
-                            <input id="pagoMisCuentas" type="checkbox" onChange={this.HandleCheck} />
+                        <label htmlFor="pagoMisCuentas" style={checkboxLayout}>
+                            <input id="pagoMisCuentas" type="checkbox"  onChange={() =>this.HandleCheck("pagomiscuentas")} />
                             <span>PagoMisCuentas</span>
                         </label>
+                        <br />
+                        <button className="btn waves-effect waves-light" style={{ margin: "10px 1px 10px 1px", zIndex: "1" }} type="submit" >Agregar</button>
                     </div>
-                    <br />
-                    <button className="btn waves-effect waves-light" style={{ margin: "10px 1px 10px 1px", zIndex: "1" }} type="submit" >Agregar</button>
                 </form>
             </div>
         )

@@ -1,11 +1,10 @@
-/*Archivo de node.js, con el que se inicia el servidor*/
+/*Express Server*/
 const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const path = require('path');
 const bodyParser = require('body-parser');
 
-//requerir el modulo especificado en la base de datos
 const { mongoose } = require('./database');
 
 
@@ -18,14 +17,22 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 //routes
-app.use('/api/month',require('./routes/monthly.routes'));
-// app.use('/',require('./routes/home.routes'));
-app.use('/history',require('./routes/history.routes'));
+app.use('/api/month', require('./routes/monthly.routes'));
+
+//app.use('/history',require('./routes/history.routes'));
 
 //static files
-app.all('*',express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')))
+
+app.get('*', async (req, res) => {
+    await res.sendFile(path.join(__dirname, '/public/index.html'), (err) => {
+        if (err) {
+            res.status(500).send(err)
+        }
+    })
+});
 
 //Start server
-app.listen(app.get('port'), ()=>{
+app.listen(app.get('port'), () => {
     console.log(`Server listening on ${app.get('port')}`);
 });

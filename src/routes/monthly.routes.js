@@ -9,9 +9,8 @@ const Budget = require('../models/budget');
 //route para obtener todos los gastos del mes
 router.get('/', async (req,res)=>{
     let month = req.query.month;
-    console.log("entrando a la API");
+    console.log("Fetching from API");
     const expenses = await Expense.find({month}).sort({date: -1});
-    console.log(expenses);
     res.json(expenses);        
 });
 

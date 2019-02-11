@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
-import Select from 'react-select';
 import Axios from 'axios';
 
 import NavBar from './Header';
-
-const sortOptions = [
-    { value: 'name', label: 'Nombre' },
-    { value: 'Recent', label: 'Mas recientes primero' },
-    { value: 'Oldest', label: 'Mas Antiguos primero' }
-];
 
 const HandleEdit = async (expenseId)=>{
     console.log(expenseId)
