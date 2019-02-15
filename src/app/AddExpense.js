@@ -120,7 +120,8 @@ class Add extends Component {
                         <input
                             placeholder="cuánto se gastó?"
                             type="number"
-                            maxLength="100"
+                            min="1"
+                            maxLength="12"
                             name="place"
                             required
                             ref={(input) => this.amountInput = input}

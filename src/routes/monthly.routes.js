@@ -27,22 +27,6 @@ router.get('/edit', async (req,res)=>{
 });
 
 
-//route para obtener todos los ingresos
-router.get('/income', async (req,res)=>{
-    const incomes = await Income.find();
-    console.log(incomes);
-    res.json(incomes);        
-});
-
-
-//route para obtener todos los presupuestos
-router.get('/budget', async (req,res)=>{
-    const budgets = await Budget.find();
-    console.log(budgets);
-    res.json(budgets);        
-});
-
-
 //route para obtener solo un gasto por id
 router.get('/:id', async (req,res)=>{
     const expense = await Expense.findById(req.params.id);
@@ -61,25 +45,6 @@ router.post('/', async (req,res)=>{
 });
 
 
-//Route para agregar un ingreso
-router.post('/income', async (req,res)=>{
-    const {name, ammount, month} = req.body;
-    const income = new Income({name, ammount, month});
-    console.log(income);
-    await income.save();
-    res.json('Status: Income Saved');
-})
-
-//Route para agregar un ingreso
-router.post('/budget', async (req,res)=>{
-    console.log(req.body);
-    const {name, month, description, amount, currentlySpent} = req.body;
-    const budget = new Budget({name, month, description, amount, currentlySpent});
-    console.log(budget);
-    await budget.save();
-    res.json('Status: Budget Saved');
-})
-
 //Route para editar un gasto por id
 router.put('/:id',async (req,res)=>{
     const { name, place } =req.body;
@@ -90,9 +55,12 @@ router.put('/:id',async (req,res)=>{
 });
 
 //Route para eliminar un gasto por id
-router.delete('/:id',async (req,res)=>{
-    await Expense.findByIdAndRemove(req.params.id);
-    res.json({status : 'Expense Deleted'});
+router.delete('/:month/:id',async (req,res)=>{
+    console.log(`Parameters received are ${req.params.id} and ${req.params.month}`);
+    const month = req.params.month;
+    await Expense.findByIdAndDelete(req.params.id);
+    const newExpense = await Expense.find({month}).sort({date: -1})
+    res.json(newExpense);
 })
 
 
